@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 5</title>
+</head>
+<body>
+    <table cellpadding="15">
+        <tr>
+            <td>Введите сумму:</td>
+            <td></td>
+            <td></td>
+            <td>KZT (tenge)</td>
+            <td>USD (dollar)</td>
+            <td>EURO (euro)</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="" id="summa">
+            </td>
+            <td>
+                <select id="convert">
+                    <option value="KZT">KZT</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EURO</option>
+                </select>
+            </td>
+            <td>
+                <select id="todo">
+                    <option value="sale">SALE</option>
+                    <option value="buy">BUY</option>
+                </select>
+            </td>
+            <td>
+                <input id="KZT" readonly>
+            </td>
+            <td>
+                <input id="USD" readonly>
+            </td>
+            <td>
+                <input id="EUR" readonly>
+            </td>
+            <td><button onclick="solve()">CONFIRM</button></td>
+        </tr>
+    </table>
+</body>
+<script>
+    function solve(){
+        let summa = document.getElementById("summa").value; // example: 15000
+        let x = document.getElementById("convert").value; //example: kzt or usd
+        let y = document.getElementById("todo").value; //example:to buy or to sale
+
+        let buy_dollar = 429;
+        let sale_dollar = 431;
+
+        let buy_euro = 507;
+        let sale_euro = 509;
+
+        let resultDollar;
+        let resultEuro;
+        let resultKZT;
+
+        if(x==="KZT"){
+            if(y==="sale"){
+                resultDollar=parseInt(summa/sale_dollar);
+                resultEuro=parseInt(summa/sale_euro);
+
+                console.log(resultEuro);
+                document.getElementById("KZT").value="-";
+                document.getElementById("USD").value=resultDollar;
+                document.getElementById("EUR").value=resultEuro;
+            }else if(y==="buy"){
+                resultDollar=parseInt(summa/buy_dollar);
+                resultEuro=parseInt(summa/buy_euro);
+
+                document.getElementById("KZT").value="-";
+                document.getElementById("USD").value=resultDollar;
+                document.getElementById("EUR").value=resultEuro;
+            }
+        }else if(x==="USD"){
+            if(y==="sale"){
+                resultKZT=parseInt(summa*431);
+                resultEuro=parseInt(summa*(431/509));
+
+                document.getElementById("KZT").value=resultKZT;
+                document.getElementById("USD").value="-";
+                document.getElementById("EUR").value=resultEuro;
+            }else if(y==="buy"){
+                resultKZT=parseInt(summa*429);
+                resultEuro=parseInt(summa*(429/507));
+
+                document.getElementById("KZT").value=resultKZT;
+                document.getElementById("USD").value="-";
+                document.getElementById("EUR").value=resultEuro;
+            }
+        }else if(x==="EUR"){
+            if(y==="sale"){
+                resultKZT=parseInt(summa*509);
+                resultDollar=parseInt(summa*(509/431));
+
+                document.getElementById("KZT").value=resultKZT;
+                document.getElementById("USD").value=resultDollar;
+                document.getElementById("EUR").value="-";
+            }else if(y==="buy"){
+                resultKZT=parseInt(summa*507);
+                resultDollar=parseInt(summa*(507/429));
+
+                document.getElementById("KZT").value=resultKZT;
+                document.getElementById("USD").value=resultDollar;
+                document.getElementById("EUR").value="-";
+            }
+        }
+    }
+</script>
+</html>
